@@ -27,6 +27,10 @@ Install the `docling-serve` package and run the server.
 pip install "docling-serve[ui]"
 docling-serve run --enable-ui
 
+# With VietOCR support for Vietnamese text
+pip install "docling-serve[ui,vietocr]"
+docling-serve run --enable-ui
+
 # Using container images, e.g. with Podman
 podman run -p 5001:5001 -e DOCLING_SERVE_ENABLE_UI=1 quay.io/docling-project/docling-serve
 ```

@@ -35,6 +35,11 @@ uv sync --extra ui --extra rapidocr
 uv sync --extra tesserocr
 ```
 
+```sh
+# Enable vietocr
+uv sync --extra vietocr
+```
+
 See `[project.optional-dependencies]` section in `pyproject.toml` for full list of options and runtime options with `uv run docling-serve --help`.
 
 ### Run the server

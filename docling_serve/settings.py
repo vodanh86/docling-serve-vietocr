@@ -49,7 +49,7 @@ class DoclingServeSettings(BaseSettings):
     load_models_at_boot: bool = True
     options_cache_size: int = 2
     enable_remote_services: bool = False
-    allow_external_plugins: bool = False
+    allow_external_plugins: bool = True  # Enable by default to support VietOCR plugin
 
     api_key: str = ""
 

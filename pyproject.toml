@@ -62,6 +62,9 @@ rapidocr = [
     "rapidocr (>=3.3,<4.0.0) ; python_version < '3.14'",
     "onnxruntime (>=1.7.0,<2.0.0)",
 ]
+vietocr = [
+    "vietocr>=0.3.0",
+]
 flash-attn = [
   "flash-attn~=2.8.2; sys_platform == 'linux' and platform_machine == 'x86_64'"
 ]
@@ -191,6 +194,9 @@ namespaces = true
 
 [project.scripts]
 docling-serve = "docling_serve.__main__:main"
+
+[project.entry-points.docling]
+docling_serve_vietocr = "docling_serve.ocr_plugins.plugin"
 
 [project.urls]
 Homepage = "https://github.com/docling-project/docling-serve"

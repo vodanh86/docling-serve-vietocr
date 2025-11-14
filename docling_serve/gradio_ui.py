@@ -232,6 +232,8 @@ def change_ocr_lang(ocr_engine):
         return gr.update(visible=True, value="eng,fra,deu,spa")
     elif ocr_engine == "rapidocr":
         return gr.update(visible=True, value="english,chinese")
+    elif ocr_engine == "vietocr":
+        return gr.update(visible=True, value="vi")
     elif ocr_engine == "ocrmac":
         return gr.update(visible=True, value="fr-FR,de-DE,es-ES,en-US")
 
@@ -646,6 +648,7 @@ with gr.Blocks(
                     ("EasyOCR", "easyocr"),
                     ("Tesseract", "tesseract"),
                     ("RapidOCR", "rapidocr"),
+                    ("VietOCR", "vietocr"),
                 ]
                 if sys.platform == "darwin":
                     engines_list.append(("OCRMac", "ocrmac"))
@@ -653,7 +656,7 @@ with gr.Blocks(
                 ocr_engine = gr.Radio(
                     engines_list,
                     label="OCR Engine",
-                    value="auto",
+                    value="vietocr",
                 )
             with gr.Column(scale=1, min_width=200):
                 ocr_lang = gr.Textbox(

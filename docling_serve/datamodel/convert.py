@@ -16,6 +16,13 @@ ocr_factory = get_ocr_factory(
 )
 ocr_engines_enum = ocr_factory.get_enum()
 
+# Try to use VietOCR as default, fallback to EasyOCR if not available
+try:
+    from docling_serve.ocr_plugins.vietocr_plugin import VietOcrOptions
+    default_ocr_kind = VietOcrOptions.kind
+except ImportError:
+    default_ocr_kind = EasyOcrOptions.kind
+
 
 class ConvertDocumentsRequestOptions(ConvertDocumentsOptions):
     ocr_engine: Annotated[  # type: ignore
@@ -24,11 +31,11 @@ class ConvertDocumentsRequestOptions(ConvertDocumentsOptions):
             description=(
                 "The OCR engine to use. String. "
                 f"Allowed values: {', '.join([v.value for v in ocr_engines_enum])}. "
-                "Optional, defaults to easyocr."
+                "Optional, defaults to vietocr."
             ),
-            examples=[EasyOcrOptions.kind],
+            examples=[default_ocr_kind],
         ),
-    ] = ocr_engines_enum(EasyOcrOptions.kind)  # type: ignore
+    ] = ocr_engines_enum(default_ocr_kind)  # type: ignore
 
     document_timeout: Annotated[
         float,

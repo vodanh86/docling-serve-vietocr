@@ -1,0 +1,1 @@
+"""VietOCR plugin for Docling."""

@@ -16,7 +16,7 @@ On top of the source of file (see below), both endpoints support the same parame
 | `image_export_mode` | ImageRefMode | Image export mode for the document (in case of JSON, Markdown or HTML). Allowed values: `placeholder`, `embedded`, `referenced`. Optional, defaults to Embedded. |
 | `do_ocr` | bool | If enabled, the bitmap content will be processed using OCR. Boolean. Optional, defaults to true |
 | `force_ocr` | bool | If enabled, replace existing text with OCR-generated text over content. Boolean. Optional, defaults to false. |
-| `ocr_engine` | `ocr_engines_enum` | The OCR engine to use. String. Allowed values: `auto`, `easyocr`, `ocrmac`, `rapidocr`, `tesserocr`, `tesseract`. Optional, defaults to `easyocr`. |
+| `ocr_engine` | `ocr_engines_enum` | The OCR engine to use. String. Allowed values: `auto`, `easyocr`, `ocrmac`, `rapidocr`, `tesserocr`, `tesseract`, `vietocr`. Optional, defaults to `easyocr`. |
 | `ocr_lang` | List[str] or NoneType | List of languages used by the OCR engine. Note that each OCR engine has different values for the language names. String or list of strings. Optional, defaults to empty. |
 | `pdf_backend` | PdfBackend | The PDF backend to use. String. Allowed values: `pypdfium2`, `dlparse_v1`, `dlparse_v2`, `dlparse_v4`. Optional, defaults to `dlparse_v4`. |
 | `table_mode` | TableFormerMode | Mode to use for table structure, String. Allowed values: `fast`, `accurate`. Optional, defaults to accurate. |
@@ -122,7 +122,7 @@ Simple payload example:
     "image_export_mode": "placeholder",
     "do_ocr": true,
     "force_ocr": false,
-    "ocr_engine": "easyocr",
+    "ocr_engine": "vietocr",
     "ocr_lang": ["en"],
     "pdf_backend": "dlparse_v2",
     "table_mode": "fast",
@@ -159,7 +159,7 @@ curl -X 'POST' \
     "image_export_mode": "placeholder",
     "do_ocr": true,
     "force_ocr": false,
-    "ocr_engine": "easyocr",
+    "ocr_engine": "vietocr",
     "ocr_lang": [
       "fr",
       "de",
@@ -194,7 +194,7 @@ payload = {
     "image_export_mode": "placeholder",
     "do_ocr": True,
     "force_ocr": False,
-    "ocr_engine": "easyocr",
+    "ocr_engine": "vietocr",
     "ocr_lang": "en",
     "pdf_backend": "dlparse_v2",
     "table_mode": "fast",
@@ -256,7 +256,7 @@ curl -X 'POST' \
   'http://127.0.0.1:5001/v1/convert/file' \
   -H 'accept: application/json' \
   -H 'Content-Type: multipart/form-data' \
-  -F 'ocr_engine=easyocr' \
+  -F 'ocr_engine=vietocr' \
   -F 'pdf_backend=dlparse_v2' \
   -F 'from_formats=pdf' \
   -F 'from_formats=docx' \
@@ -288,7 +288,7 @@ parameters = {
 "image_export_mode": "placeholder",
 "do_ocr": True,
 "force_ocr": False,
-"ocr_engine": "easyocr",
+"ocr_engine": "vietocr",
 "ocr_lang": ["en"],
 "pdf_backend": "dlparse_v2",
 "table_mode": "fast",
