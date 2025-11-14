@@ -34,8 +34,13 @@ class VietOcrOptions(OcrOptions):
 class VietOcrModel(BaseOcrModel):
     """VietOCR model implementation for Docling."""
 
-    def __init__(self, enabled: bool, options: VietOcrOptions):
-        super().__init__(enabled=enabled, options=options)
+    def __init__(self, enabled: bool, options: VietOcrOptions, artifacts_path=None, accelerator_options=None):
+        super().__init__(
+            enabled=enabled, 
+            options=options,
+            artifacts_path=artifacts_path,
+            accelerator_options=accelerator_options
+        )
         self.options: VietOcrOptions = options
         self.predictor = None
 
@@ -77,14 +82,16 @@ class VietOcrModel(BaseOcrModel):
         """Return the options type for this model."""
         return VietOcrOptions
 
-    def __call__(self, page_batch: Iterable[Page]) -> Iterable[Page]:
+    def __call__(self, page_batch: Iterable[Page], settings=None) -> Iterable[Page]:
         """Process pages with VietOCR."""
         if not self.enabled or self.predictor is None:
             yield from page_batch
             return
 
+        pages_out = 0
         for page in page_batch:
-            if page.image is None:
+            if not hasattr(page, 'image') or page.image is None:
+                pages_out += 1
                 yield page
                 continue
 
@@ -172,6 +179,7 @@ class VietOcrModel(BaseOcrModel):
                     page.predictions.ocr_cells = []
                 page.predictions.ocr_cells.extend(ocr_cells)
 
+            pages_out += 1
             yield page
 
     @classmethod
